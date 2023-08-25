@@ -12,9 +12,10 @@ from langchain.docstore.document import Document
 
 # Step-2 Write all the function definitions
 def textRephraser(original_text):
-    chat = ChatOpenAI(
-        model="gpt-3.5-turbo-16k",
-        temperature=0.7
+    try:
+        chat = ChatOpenAI(
+            model="gpt-3.5-turbo-16k",
+            temperature=0.7
     )
     system_template = """You are an assistant designed to rephrase the given text."""
     system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
@@ -26,7 +27,11 @@ def textRephraser(original_text):
 
     chain = LLMChain(llm=chat, prompt=chat_prompt)
     result = chain.run(original_text=original_text)
-    return result # returns string   
+    return result # returns string
+
+    except Exception as e:
+          st.error(f"An error occurred: {e}")
+          return ""
 
 def display_rephrased_text(rephrased_text):
     if rephrased_text != "":
