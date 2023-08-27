@@ -1,3 +1,7 @@
 streamlit
 langchain
 demogpt
+openai
+webbrowser
+subprocess
+os
